@@ -12,6 +12,6 @@ public class AppArticulosDeLimpieza {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        System.out.println("hola amigos como estan amigos traviesos, imbeciles");
+        System.out.println("hola amigos como estan amigos traviesos, omar MAS Z, 04, peru es clave, gaaaaaaaaaaa, xd, profe mantari mi presi");
     }
 }
