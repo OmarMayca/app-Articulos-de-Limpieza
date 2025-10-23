@@ -1,13 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package productos.trapos;
 
-/**
- *
- * @author Matias
- */
-public class TrapoGrande {
-    
+public class TrapoGrande extends Trapo {
+    public TrapoGrande() {
+    super("Trapo Grande",4.00,150);
+}
 }

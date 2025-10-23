@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package productos.sprays;
 
-/**
- *
- * @author Matias
- */
-public class SprayMataPulga {
-    
+public class SprayMataPulga extends Spray {
+    public SprayMataPulga() {
+        super("Spray MataPulga", 9.00, 40);
+    }
 }
