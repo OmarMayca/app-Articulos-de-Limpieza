@@ -1,7 +1,6 @@
 
 package productos;
 
-
 public class Producto {
     private String nombre;
     private double precio;
@@ -38,7 +37,7 @@ public class Producto {
         this.stock = stock;
     }
 
-    // Método común
+    // Método para mostrar información del producto
     public void mostrarInfo() {
         System.out.println("Producto: " + nombre);
         System.out.println("Precio: S/." + precio);

@@ -1,6 +1,4 @@
-
 package productos.jabones;
-
 
 import productos.Producto;
 
@@ -16,3 +14,4 @@ public class Jabon extends Producto {
         super.mostrarInfo();
     }
 }
+
