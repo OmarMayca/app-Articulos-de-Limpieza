@@ -1,13 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package productos.sprays;
 
-/**
- *
- * @author OMAR
- */
-public class sprays {
-    
+import productos.Producto;
+
+public class Spray extends Producto {
+
+    public Spray(String nombre, double precio, int stock) {
+        super(nombre, precio, stock);
+    }
+
+    @Override
+    public void mostrarInfo() {
+        System.out.println("Categoría: Sprays");
+        super.mostrarInfo();
+    }
 }
