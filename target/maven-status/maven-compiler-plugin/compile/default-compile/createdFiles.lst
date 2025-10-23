@@ -25,7 +25,6 @@ usuario\Usuario.class
 productos\detergentes\Detergente.class
 ventas\Venta.class
 productos\papeles\PapelNoble.class
-modelo\Producto.class
 productos\Producto.class
 productos\sprays\SprayMataPolilla.class
 productos\detergentes\DetergenteSapolio.class
