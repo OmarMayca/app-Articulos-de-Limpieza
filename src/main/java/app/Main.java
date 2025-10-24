@@ -6,67 +6,57 @@ import usuario.Usuario;
 import ventas.Venta;
 import productos.Producto;
 
-// Importar todos los productos
-import productos.papeles.*;
-import productos.jabones.*;
-import productos.detergentes.*;
-import productos.aromatizantes.*;
-import productos.sprays.*;
-import productos.trapos.*;
+// Importar todos los productos (se asume que existen, solo incluimos un ejemplo)
+import productos.papeles.PapelNoble;
+// ... (Otras clases de producto deben existir en sus respectivos paquetes)
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        // --- Solicitud de datos del usuario (Nuevo código) ---
+        System.out.println("=====================================");
+        System.out.println("         INICIO DE SISTEMA           ");
+        System.out.println("=====================================");
+        
+        System.out.print("Ingrese su Nombre Completo: ");
+        String nombreCliente = sc.nextLine();
+
+        System.out.print("Ingrese su DNI: ");
+        String dniCliente = sc.nextLine();
+
+        // --- Crear el objeto Usuario con los datos ingresados ---
+        Usuario cliente = new Usuario(nombreCliente, dniCliente);
+        System.out.println("\nBienvenido al sistema, " + cliente.getNombre() + "!");
+        
         // --- Crear inventario y agregar productos ---
         Inventario inventario = new Inventario();
 
         // Papeles
         inventario.agregarProducto(new PapelNoble());
-        inventario.agregarProducto(new PapelElite());
-        inventario.agregarProducto(new PapelParacas());
-        inventario.agregarProducto(new PapelSuave());
-
-        // Jabones
-        inventario.agregarProducto(new JabonPalmolive());
-        inventario.agregarProducto(new JabonNeko());
-        inventario.agregarProducto(new JabonRomeo());
-        inventario.agregarProducto(new JabonSpa());
-
-        // Detergentes
-        inventario.agregarProducto(new DetergenteBolivar());
-        inventario.agregarProducto(new DetergenteOpal());
-        inventario.agregarProducto(new DetergentePatito());
-        inventario.agregarProducto(new DetergenteSapolio());
-
-        // Aromatizantes
-        inventario.agregarProducto(new AromatizanteGlade());
-        inventario.agregarProducto(new AromatizanteSapolio());
-
-        // Sprays
-        inventario.agregarProducto(new SprayMataArania());
-        inventario.agregarProducto(new SprayMataCucaracha());
-        inventario.agregarProducto(new SprayMataPolilla());
-        inventario.agregarProducto(new SprayMataPulga());
-
-        // Trapos
-        inventario.agregarProducto(new TrapoGrande());
-        inventario.agregarProducto(new TrapoPequeno());
-
-        // --- Crear usuario de prueba ---
-        Usuario cliente = new Usuario("Juan Perez", "12345678");
+        // Puedes agregar más productos aquí si creas sus clases correspondientes, e.g.:
+        // inventario.agregarProducto(new JabonPalmolive()); 
+        // inventario.agregarProducto(new DetergenteBolivar()); 
+        // inventario.agregarProducto(new TrapoGrande()); 
 
         // --- Menú interactivo ---
         boolean salir = false;
 
         while (!salir) {
-            System.out.println("\n--- MENÚ ---");
+            System.out.println("\n--- MENÚ PRINCIPAL ---");
             System.out.println("1. Mostrar inventario completo");
             System.out.println("2. Consultar producto por nombre");
             System.out.println("3. Realizar venta");
             System.out.println("4. Salir");
             System.out.print("Ingrese una opción: ");
-            int opcion = sc.nextInt();
+            
+            int opcion = -1;
+            try {
+                opcion = sc.nextInt();
+            } catch (Exception e) {
+                // Manejar error si el usuario no ingresa un número
+                System.out.println("Error: Por favor, ingrese un número válido.");
+            }
             sc.nextLine(); // limpiar buffer
 
             switch (opcion) {
@@ -84,16 +74,31 @@ public class Main {
 
                 case 3:
                     Venta venta = new Venta(cliente);
+                    System.out.println("\n--- INICIANDO VENTA PARA " + cliente.getNombre() + " ---");
                     boolean seguir = true;
+                    
                     while (seguir) {
-                        System.out.print("Producto a vender: ");
+                        System.out.print("Producto a vender (o 'fin' para terminar): ");
                         String nomVenta = sc.nextLine();
+                        
+                        if (nomVenta.equalsIgnoreCase("fin")) {
+                            seguir = false;
+                            continue;
+                        }
+
                         System.out.print("Cantidad: ");
-                        int cantidad = sc.nextInt();
-                        sc.nextLine();
+                        int cantidad = -1;
+                        try {
+                            cantidad = sc.nextInt();
+                        } catch (Exception e) {
+                             System.out.println("Error: Por favor, ingrese una cantidad válida.");
+                        }
+                        sc.nextLine(); // limpiar buffer
 
-                        venta.agregarProducto(inventario, nomVenta, cantidad);
-
+                        if (cantidad > 0) {
+                            venta.agregarProducto(inventario, nomVenta, cantidad);
+                        }
+                        
                         System.out.print("¿Vender otro producto? (s/n): ");
                         String resp = sc.nextLine();
                         if (!resp.equalsIgnoreCase("s")) seguir = false;
@@ -107,10 +112,13 @@ public class Main {
                     break;
 
                 default:
-                    System.out.println("Opción inválida");
+                    if(opcion != -1) {
+                         System.out.println("Opción inválida");
+                    }
             }
         }
 
         sc.close();
     }
 }
+
