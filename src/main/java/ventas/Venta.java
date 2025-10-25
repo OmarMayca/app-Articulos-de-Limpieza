@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class Venta {
     private Usuario cliente;
-    private HashMap<Producto, Integer> productosVendidos; // Producto y cantidad
+    private HashMap<Producto, Integer> productosVendidos; 
 
     public Venta(Usuario cliente) {
         this.cliente = cliente;
@@ -20,7 +20,7 @@ public class Venta {
         Producto p = inventario.buscarProducto(nombreProducto);
         if (p != null) {
             if (inventario.actualizarStock(nombreProducto, cantidad)) {
-                // Si ya existe el producto en la venta, sumar cantidad
+                
                 productosVendidos.put(p, productosVendidos.getOrDefault(p, 0) + cantidad);
                 System.out.println("Producto agregado: " + nombreProducto + " x" + cantidad);
             } else {
