@@ -6,15 +6,15 @@ import usuario.Usuario;
 import ventas.Venta;
 import productos.Producto;
 
-// Importar todos los productos (se asume que existen, solo incluimos un ejemplo)
+// Importar los productos 
 import productos.papeles.PapelNoble;
-// ... (Otras clases de producto deben existir en sus respectivos paquetes)
+
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        // --- Solicitud de datos del usuario (Nuevo código) ---
+        // --- Solicitud de datos del usuario  ---
         System.out.println("=====================================");
         System.out.println("         INICIO DE SISTEMA           ");
         System.out.println("=====================================");
@@ -34,10 +34,7 @@ public class Main {
 
         // Papeles
         inventario.agregarProducto(new PapelNoble());
-        // Puedes agregar más productos aquí si creas sus clases correspondientes, e.g.:
-        // inventario.agregarProducto(new JabonPalmolive()); 
-        // inventario.agregarProducto(new DetergenteBolivar()); 
-        // inventario.agregarProducto(new TrapoGrande()); 
+        
 
         // --- Menú interactivo ---
         boolean salir = false;
@@ -57,7 +54,7 @@ public class Main {
                 // Manejar error si el usuario no ingresa un número
                 System.out.println("Error: Por favor, ingrese un número válido.");
             }
-            sc.nextLine(); // limpiar buffer
+            sc.nextLine(); 
 
             switch (opcion) {
                 case 1:
@@ -93,7 +90,7 @@ public class Main {
                         } catch (Exception e) {
                              System.out.println("Error: Por favor, ingrese una cantidad válida.");
                         }
-                        sc.nextLine(); // limpiar buffer
+                        sc.nextLine(); 
 
                         if (cantidad > 0) {
                             venta.agregarProducto(inventario, nomVenta, cantidad);
