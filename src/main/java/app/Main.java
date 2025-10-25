@@ -6,37 +6,72 @@ import usuario.Usuario;
 import ventas.Venta;
 import productos.Producto;
 
-// Importar los productos 
-import productos.papeles.PapelNoble;
-
+// --- Importar todos los productos ---
+import productos.papeles.*;
+import productos.trapos.*;
+import productos.sprays.*;
+import productos.aromatizantes.*;
+import productos.detergentes.*;
+import productos.jabones.*;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        // --- Solicitud de datos del usuario  ---
+        // --- Inicio del sistema ---
         System.out.println("=====================================");
         System.out.println("         INICIO DE SISTEMA           ");
         System.out.println("=====================================");
-        
+
         System.out.print("Ingrese su Nombre Completo: ");
         String nombreCliente = sc.nextLine();
 
         System.out.print("Ingrese su DNI: ");
         String dniCliente = sc.nextLine();
 
-        // --- Crear el objeto Usuario con los datos ingresados ---
         Usuario cliente = new Usuario(nombreCliente, dniCliente);
         System.out.println("\nBienvenido al sistema, " + cliente.getNombre() + "!");
-        
-        // --- Crear inventario y agregar productos ---
+
+        // --- Crear inventario ---
         Inventario inventario = new Inventario();
 
-        // Papeles
-        inventario.agregarProducto(new PapelNoble());
-        
+   
 
-        // --- Menú interactivo ---
+        // --- PAPEL HIGIÉNICO ---
+        inventario.agregarProducto(new PapelNoble());
+        inventario.agregarProducto(new PapelElite());
+        inventario.agregarProducto(new PapelParacas());
+        inventario.agregarProducto(new PapelSuave());
+
+        // --- TRAPOS ---
+        inventario.agregarProducto(new TrapoGrande());
+        inventario.agregarProducto(new TrapoPequeno());
+
+        // --- SPRAYS ---
+        inventario.agregarProducto(new SprayMataArania());
+        inventario.agregarProducto(new SprayMataCucaracha());
+        inventario.agregarProducto(new SprayMataPolilla());
+        inventario.agregarProducto(new SprayMataPulga());
+
+        // --- AROMATIZANTES ---
+        inventario.agregarProducto(new AromatizanteGlade());
+        inventario.agregarProducto(new AromatizanteSapolio());
+
+        // --- DETERGENTES ---
+        inventario.agregarProducto(new DetergenteBolivar());
+        inventario.agregarProducto(new DetergenteOpal());
+        inventario.agregarProducto(new DetergentePatito());
+        inventario.agregarProducto(new DetergenteSapolio());
+
+        // --- JABONES ---
+        inventario.agregarProducto(new JabonNeko());
+        inventario.agregarProducto(new JabonPalmolive());
+        inventario.agregarProducto(new JabonRomeo());
+        inventario.agregarProducto(new JabonSpa());
+
+        // ================================
+        //          MENÚ PRINCIPAL
+        // ================================
         boolean salir = false;
 
         while (!salir) {
@@ -46,15 +81,14 @@ public class Main {
             System.out.println("3. Realizar venta");
             System.out.println("4. Salir");
             System.out.print("Ingrese una opción: ");
-            
+
             int opcion = -1;
             try {
                 opcion = sc.nextInt();
             } catch (Exception e) {
-                // Manejar error si el usuario no ingresa un número
                 System.out.println("Error: Por favor, ingrese un número válido.");
             }
-            sc.nextLine(); 
+            sc.nextLine();
 
             switch (opcion) {
                 case 1:
@@ -73,11 +107,11 @@ public class Main {
                     Venta venta = new Venta(cliente);
                     System.out.println("\n--- INICIANDO VENTA PARA " + cliente.getNombre() + " ---");
                     boolean seguir = true;
-                    
+
                     while (seguir) {
                         System.out.print("Producto a vender (o 'fin' para terminar): ");
                         String nomVenta = sc.nextLine();
-                        
+
                         if (nomVenta.equalsIgnoreCase("fin")) {
                             seguir = false;
                             continue;
@@ -88,14 +122,14 @@ public class Main {
                         try {
                             cantidad = sc.nextInt();
                         } catch (Exception e) {
-                             System.out.println("Error: Por favor, ingrese una cantidad válida.");
+                            System.out.println("Error: Por favor, ingrese una cantidad válida.");
                         }
-                        sc.nextLine(); 
+                        sc.nextLine();
 
                         if (cantidad > 0) {
                             venta.agregarProducto(inventario, nomVenta, cantidad);
                         }
-                        
+
                         System.out.print("¿Vender otro producto? (s/n): ");
                         String resp = sc.nextLine();
                         if (!resp.equalsIgnoreCase("s")) seguir = false;
@@ -109,8 +143,8 @@ public class Main {
                     break;
 
                 default:
-                    if(opcion != -1) {
-                         System.out.println("Opción inválida");
+                    if (opcion != -1) {
+                        System.out.println("Opción inválida");
                     }
             }
         }
